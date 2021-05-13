@@ -1,0 +1,9 @@
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\bin\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.deps.json
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\bin\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.dll
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\bin\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.pdb
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\obj\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.csprojAssemblyReference.cache
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\obj\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.AssemblyInfoInputs.cache
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\obj\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.AssemblyInfo.cs
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\obj\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.csproj.CoreCompileInputs.cache
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\obj\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.dll
+D:\AFORO255\CLASES\2021\52.- MSN - FEB 21\05\MS.AFORO255.Web\cross\MS.AFORO255.Cross.Proxy\obj\Debug\netstandard2.0\MS.AFORO255.Cross.Proxy.pdb

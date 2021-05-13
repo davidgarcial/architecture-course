@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\AFORO255\\CLASES\\2021\\52.- MSN - FEB 21\\05\\MS.AFORO255.Web\\cross\\MS.AFORO255.Cross.Proxy\\MS.AFORO255.Cross.Proxy.csproj": {}
+  },
+  "projects": {
+    "D:\\AFORO255\\CLASES\\2021\\52.- MSN - FEB 21\\05\\MS.AFORO255.Web\\cross\\MS.AFORO255.Cross.Proxy\\MS.AFORO255.Cross.Proxy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\AFORO255\\CLASES\\2021\\52.- MSN - FEB 21\\05\\MS.AFORO255.Web\\cross\\MS.AFORO255.Cross.Proxy\\MS.AFORO255.Cross.Proxy.csproj",
+        "projectName": "MS.AFORO255.Cross.Proxy",
+        "projectPath": "D:\\AFORO255\\CLASES\\2021\\52.- MSN - FEB 21\\05\\MS.AFORO255.Web\\cross\\MS.AFORO255.Cross.Proxy\\MS.AFORO255.Cross.Proxy.csproj",
+        "packagesPath": "C:\\Users\\ivan_\\.nuget\\packages\\",
+        "outputPath": "D:\\AFORO255\\CLASES\\2021\\52.- MSN - FEB 21\\05\\MS.AFORO255.Web\\cross\\MS.AFORO255.Cross.Proxy\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ivan_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

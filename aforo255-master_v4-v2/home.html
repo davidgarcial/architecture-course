@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Aforo255</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="css/ninja.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"> 
+
+    <!-- Javascripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="script/ninja.js"></script>
+
+</head>
+
+<body>
+    <div class="webapp">
+        <div class="header">
+            <div class="logo-2"></div>
+            <div class="header-options" id="header-options">
+                <div class="user">
+                    <div class="user-name">Jose Luis Nakahodo</div>
+                    <div class="user-photo user-photo-text">JN</div>
+                </div>
+
+                <div class="out-session" id="out-session">
+                    <img src="css/img/search-icon.png">
+                    <span>Cerrar sesión</span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <!-- <div class="browser">
+                <div class="browser-options">
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Home</span>
+                    </div>
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Productos</span>
+                    </div>
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Crédito</span>
+                    </div>
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Clientes</span>
+                    </div>
+        
+                </div>
+            </div> -->
+
+
+            <div class="browser">
+                <div class="browser-options">
+                    <div class="option" >
+                        <!-- <span class="option-icon">
+                            <img src="css/img/search-icon.png" >
+                        </span> -->
+                        <span class="option-text active-parent">
+                            <img src="css/img/search-icon.png" >  Home                                 
+                        </span>
+                    </div>
+                    <!-- <div class="option">
+                        <span class="option-icon">
+                            <img src="css/img/search-icon.png" >
+                        </span>
+                        <span class="option-text">Productos</span>
+                        <span class="option-sub">
+                            <span class="option-text">Listado </span>
+                            <span class="option-text">Registro</span>
+                        </span>
+                    </div> -->
+                    <div class="option">
+                        <!-- <span class="option-icon">
+                            <img src="css/img/search-icon.png" >
+                        </span> -->
+                        <span class="option-text">
+                            <img src="css/img/search-icon.png" > Creditos
+                        </span>
+
+                        <span class="option-sub">
+                            <span class="option-text menu-load" data-path="credit-list">   
+                                Listado 
+                            </span>
+                            <span class="option-text menu-load" data-path="credit-add">   
+                                Registro 
+                            </span>
+                        </span>
+                    </div>
+                    <div class="option" >
+                        <!-- <span class="option-icon">
+                            <img src="css/img/search-icon.png">
+                        </span> -->
+                        <span class="option-text active-parent">
+                            <img src="css/img/search-icon.png">   Clientes
+                        </span>
+
+                        <span class="option-sub">
+                            <span class="option-text menu-load active-child" data-path="customer-list">     
+                                Listado 
+                            </span>
+
+                            <span class="option-text menu-load" data-path="customer-add">
+                                Registro  
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+             <!--  INICIO CONTENIDO  -->
+            <div id="div-content"> 
+
+
+                <div class="view view-home">
+                    <div class="view-title">
+                        <div class="view-name">
+                            <div class="view-name-small">HOLA, BIENVENIDOS</div>
+                            <!-- <div class="view-name-text">Registrar cliente</div> -->
+                        </div>
+
+                        <div class="view-image">
+                            <img src="css/img/aforo-255-blue.png">
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+             <!--  FIN CONTENIDO  -->
+
+        </div>
+        <div class="footer">
+            <pre><span class="bold"><  </span>Aforo255 / Todos los derechos reservados / 2019<span class="bold">  /></span></pre>
+        </div>
+    </div>
+    <!-- /--------------------------------------------------------------------------------/ -->
+    <script type="text/javascript">
+
+    </script>
+
+    <script type="text/javascript" src="script/bundle.js"></script>
+
+    
+</body>
+
+</html>

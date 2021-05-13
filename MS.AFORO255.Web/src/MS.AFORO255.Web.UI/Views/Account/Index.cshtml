@@ -1,0 +1,34 @@
+﻿@model List<MS.AFORO255.Web.DTO.Account.AccountDTOResponse>
+
+<div class="item__credit">
+    <div class="credit__title">
+        <h3>Cuentas</h3><span>Listado de cuentas</span>
+    </div>
+    <div class="credit__table">
+        <table>
+            <tr>
+                <th>ID Credito</th>
+                <th>Total</th>
+                <th>ID Cliente</th>
+                <th>Cliente</th>
+                <th>Email</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdAccount</td>
+                    <td>@item.TotalAmount</td>
+                    <td>@item.Customer.IdCustomer</td>
+                    <td>@item.Customer.FullName</td>
+                    <td>@item.Customer.Email</td>
+                    <td><a class="ligth" href="#" disabled="true">Deposito</a></td>
+                    <td><a class="ligth" href="#" disabled="true">Retiro</a></td>
+                    <td><a class="full" href="@Url.Action("Index","History", new {accountId= item.IdAccount})">Ver Movimientos</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@model List<MS.AFORO255.Web.DTO.History.HistoryDTOResponse>
+
+<div class="item__credit">
+    <div class="credit__title">
+        <h3>Movimientos</h3><span>Listado de movimientos</span>
+    </div>
+    <div class="credit__table">
+        <table>
+            <tr>
+                <th>ID Transaccion</th>
+                <th>ID Cuenta</th>
+                <th>Monto</th>
+                <th>Operacion</th>
+                <th>Fecha</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdTransaction</td>
+                    <td>@item.AccountId</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Type</td>
+                    <td>@item.CreationDate</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

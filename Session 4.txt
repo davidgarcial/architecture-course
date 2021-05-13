@@ -1,0 +1,542 @@
+SESION 04
+=========
+
+
+docker pull redis
+docker pull jaegertracing/all-in-one:lates
+docker pull prom/prometheus
+docker pull grafana/grafana
+docker pull datalust/seq
+
+
+REDIS
+
+docker run -d -p 6379:6379 --network micro -v c:/docker/redis:/data -e REDIS_PASSWORD=Aforo255#2019 --name redis-database redis --requirepass Aforo255#2019
+docker run -d -p 6379:6379 --network micro  -e REDIS_PASSWORD=Aforo255#2019 --name redis-database redis --requirepass Aforo255#2019
+
+
+  "redis": {
+    "connectionString": "localhost,password=Aforo255#2019"
+  }
+
+
+
+NUGET
+Aforo255.Cross.Cache
+
+
+CONFIGURESERVICES
+services.AddRedis();
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using MS.AFORO255.History.DTOs;
+using MS.AFORO255.History.Services;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MS.AFORO255.History.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class HistoryController : ControllerBase
+    {
+        private readonly IHistoryService _historyService;
+        private readonly IDistributedCache _distributedCache;
+
+        public HistoryController(IHistoryService historyService, IDistributedCache distributedCache)
+        {
+            _historyService = historyService;
+            _distributedCache = distributedCache;
+        }
+
+        [HttpGet("{accountId}")]
+        public async Task<IActionResult> Get(int accountId)
+        {
+            //var result = await _historyService.GetAll();
+            //var model = result.Where(x => x.AccountId == accountId).ToList();
+            //return Ok(model);
+
+            string historydata = $"historydata-{accountId}";
+            var _cache = _distributedCache.GetString(historydata);
+            IEnumerable<HistoryResponse> model;
+            if (_cache == null)
+            {
+                var result = await _historyService.GetAll();
+                model = result.Where(x => x.AccountId == accountId).ToList();
+
+                var options = new DistributedCacheEntryOptions()
+                                    .SetSlidingExpiration(TimeSpan.FromSeconds(10));
+
+                _distributedCache.SetString(historydata, JsonConvert.SerializeObject(model), options);
+            }
+            else
+            {
+                model = JsonConvert.DeserializeObject<List<HistoryResponse>>(_cache);
+            }
+            return Ok(model);
+
+        }
+    }
+}
+
+
+
+
+
+TRAZAS DISTRIBUIDAS
+===================
+
+https://www.jaegertracing.io/docs/1.22/
+
+docker run -d --name jaeger-service -e COLLECTOR_ZIPKIN_HTTP_PORT=9411  -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686  -p 14268:14268  -p 9411:9411  --network micro  jaegertracing/all-in-one:latest
+
+
+NUGET
+
+Aforo255.Cross.Tracing
+
+OpenTracing.Contrib.NetCore 
+
+
+APPSETTINGS
+
+"jaeger": {
+    "enabled": true,
+    "serviceName": "[name]-service",
+    "udpHost": "localhost",
+    "udpPort": 6831,
+    "maxPacketSize": 0,
+    "sampler": "const"
+  },
+
+
+CONFIGURESERVICES
+
+  /*Start - Tracer distributed*/
+            services.AddJaeger();
+            services.AddOpenTracing();
+            /*End - Tracer distributed*/
+
+
+
+
+
+
+
+
+METRICAS
+
+https://prometheus.io/docs/introduction/overview/
+
+
+
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'codelab-monitor'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus-service'
+    static_configs:
+      - targets: ['prometheus-service:9090']
+      
+  - job_name: 'gateway-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5000']
+      #- targets: ['gateway-service:8080']
+
+  - job_name: 'security-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5001']
+      #- targets: ['security-service:8080']
+
+  - job_name: 'account-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5002']
+      #- targets: ['account-service:8080']
+      
+  - job_name: 'deposit-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5003']
+      #- targets: ['deposit-service:8080']
+      
+  - job_name: 'withdrawal-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5004']
+      #- targets: ['withdrawal-service:8080']
+      
+  - job_name: 'history-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5005']
+      #- targets: ['history-service:8080']
+
+  - job_name: 'notification-service'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:5006']
+      #- targets: ['notification-service:8080']
+      
+ 
+
+
+
+
+
+docker run -p 9090:9090 --name prometheus-service --network micro -v c:/Users/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml -d  prom/prometheus
+
+
+
+  "app": {
+    "name": "account-service"
+  },
+  "metrics": {
+    "enabled": true,
+    "influxEnabled": false,
+    "prometheusEnabled": true,
+    "influxUrl": "",
+    "database": "",
+    "env": "production",
+    "interval": 5
+  }
+
+
+NUGET
+
+Aforo255.Cross.Metric
+
+
+PROGRAM
+
+
+
+ public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureAppConfiguration((host, builder) =>
+                    {
+                        var env = host.HostingEnvironment;
+                        builder.AddConfigServer(env.EnvironmentName);
+                    });
+
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseAppMetrics();
+                });
+
+
+
+CONFIGURESERVICES
+
+/*Start - Metrics*/
+            // If using Kestrel:
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            services.AddTransient<IMetricsRegistry, MetricsRegistry>();
+            /*End - Metrics*/
+
+
+
+
+
+
+
+
+
+
+using Aforo255.Cross.Metric.Registry;
+using Microsoft.AspNetCore.Mvc;
+using MS.AFORO255.Account.DTOs;
+using MS.AFORO255.Account.Service;
+using System.Linq;
+
+namespace MS.AFORO255.Account.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : ControllerBase
+    {
+        private readonly IAccountService _accountService;
+        private readonly IMetricsRegistry _metrics;
+
+        public AccountController(IAccountService accountService, IMetricsRegistry metrics)
+        {
+            _accountService = accountService;
+            _metrics = metrics;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            _metrics.IncrementFindQuery();
+            return Ok(_accountService.GetAll());
+        }
+
+        [HttpPost("Deposit")]
+        public IActionResult Deposit([FromBody] AccountRequest request)
+        {
+            var result = _accountService.GetAll().Where(x => x.IdAccount == request.IdAccount).FirstOrDefault();
+            Models.Account account = new Models.Account()
+            {
+                IdAccount = request.IdAccount,
+                IdCustomer = result.IdCustomer,
+                TotalAmount = result.TotalAmount + request.Amount,
+                Customer = result.Customer
+            };
+            _accountService.Deposit(account);
+            return Ok();
+        }
+
+        [HttpPost("Withdrawal")]
+        public IActionResult Withdrawal([FromBody] AccountRequest request)
+        {
+            var result = _accountService.GetAll().Where(x => x.IdAccount == request.IdAccount).FirstOrDefault();
+            if (result.TotalAmount < request.Amount)
+            {
+                return BadRequest(new { message = "The indicated amount cannot be withdrawal" });
+            }
+            Models.Account account = new Models.Account()
+            {
+                IdAccount = request.IdAccount,
+                IdCustomer = result.IdCustomer,
+                TotalAmount = result.TotalAmount - request.Amount,
+                Customer = result.Customer
+            };
+            _accountService.Withdrawal(account);
+            return Ok();
+        }
+    }
+}
+
+
+VISUALIZADOR DE METRICAS
+
+docker run -p 3000:3000 --name grafana-service --network micro -d grafana/grafana
+
+http://prometheus-service:9090
+
+
+
+
+LOG
+
+docker run -e ACCEPT_EULA=Y --name log-service -p 5341:80 -d datalust/seq
+
+
+
+NUGET
+
+Seq.Extensions.Logging  
+
+
+
+  "seq": {
+    "enabled": true,
+    "url": "http://localhost:5341",
+    "token": "UO5dqhOV4kjUfVGPrUEt"
+  }
+
+
+
+
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            IHostApplicationLifetime applicationLifetime, IConsulClient consulClient,
+            ILoggerFactory loggerFactory)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            var serviceId = app.UseConsul();
+            applicationLifetime.ApplicationStopped.Register(() =>
+            {
+                consulClient.Agent.ServiceDeregister(serviceId);
+            });
+
+            if (bool.Parse(Configuration["seq:enabled"]) == true)
+            {
+                loggerFactory.AddSeq(Configuration["seq:url"], apiKey: Configuration["seq:token"]);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using MS.AFORO255.Security.Services;
+using Microsoft.Extensions.Options;
+using Aforo255.Cross.Token.Src;
+using MS.AFORO255.Security.DTOs;
+using Microsoft.Extensions.Logging;
+
+namespace MS.AFORO255.Security.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private readonly IAccessService _accessService;
+        private readonly ILogger<AuthController> _log;
+        private readonly JwtOptions _jwtOption;
+
+        public AuthController(IAccessService accessService, IOptionsSnapshot<JwtOptions> jwtOption,
+            ILogger<AuthController> log)
+        {
+            _accessService = accessService;
+            _log = log;
+            _jwtOption = jwtOption.Value;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            _log.LogInformation("Get AuthController");
+
+            return Ok(_accessService.GetAll());
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] AuthRequest request)
+        {
+            _log.LogInformation("Post AuthController");
+
+            if (!_accessService.Validate(request.UserName, request.Password))
+            {
+                return Unauthorized();
+            }
+
+            Response.Headers.Add("access-control-expose-headers", "Authorization");
+            Response.Headers.Add("Authorization", JwtToken.Create(_jwtOption));
+
+            return Ok();
+        }
+
+
+    }
+}
+
+
+CORS
+
+https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0
+
+
+
+
+
+using Aforo255.Cross.Token.Src;
+using Aforo255.Cross.Tracing.Src;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+
+namespace MS.AFORO255.Gateway
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+        readonly string clientPolicy = "_clientPolicy";
+
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            /*Start - Cors*/
+            services.AddCors(o => o.AddPolicy(clientPolicy, builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+
+            }));
+            services.AddRouting(r => r.SuppressCheckForUnhandledSecurityMetadata = true);
+            /*End - Cors*/
+
+
+            services.AddJwtCustomized();
+            services.AddOcelot();
+
+            /*Start - Tracer distributed*/
+            services.AddJaeger();
+            services.AddOpenTracing();
+            /*End - Tracer distributed*/
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            /*Start - Cors*/
+            app.UseCors(clientPolicy);
+            app.Use((context, next) =>
+            {
+                context.Items["__CorsMiddlewareInvoked"] = true;
+                return next();
+            });
+            /*End - Cors*/
+
+
+            app.UseOcelot().Wait();
+        }
+    }
+}
+

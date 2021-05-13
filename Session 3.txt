@@ -1,0 +1,617 @@
+SESION 03
+========
+ 
+docker pull consul	
+docker pull fabiolb/fabio
+docker pull hyness/spring-cloud-config-server
+ 
+GATEWAY
+========
+ 
+https://ocelot.readthedocs.io/en/latest/
+ 
+ 
+NUGET
+ocelot
+ 
+ 
+ 
+{
+  "Routes": [
+ 
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureAppConfiguration((host, config) =>
+                    {
+                        config.AddJsonFile("ocelot.json", optional: false);
+                    });
+ 
+                    webBuilder.UseStartup<Startup>();
+                });
+ 
+ 
+ 
+ 
+  public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddOcelot();
+        }
+ 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.UseOcelot().Wait();
+        }
+ 
+ 
+ 
+ 
+ 
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/token",
+      "UpstreamHttpMethod": [ "Post" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:62452",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "MS.AFORO255.Gateway": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": false,
+      "launchUrl": "",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+ 
+ 
+ 
+ 
+http://localhost:5000/api/token
+ 
+ 
+{
+	"UserName":"aforo255",
+	"Password":"123456"
+}
+ 
+ 
+ 
+ 
+ 
+//SERGIO ANDRADES
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/token",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/withdrawal",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5004"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/transaction/withdrawal",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/deposit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/transaction/deposit",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/history/{accountId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5005"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/history/{accountId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
+ 
+// David Garcia 
+{
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/token",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/deposit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/deposit",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/withdrawal",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5004"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/withdrawal",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/history/1",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5005"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/history",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+ 
+ 
+ 
+ 
+ 
+public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddJwtCustomized();
+            services.AddOcelot();
+        }
+ 
+ 
+ 
+ 
+ 
+{
+  "jwt": {
+    "enabled": true,
+    "issuer": "http://ivancuadros.com",
+    "audience": "web",
+    "key": "CLave#12548MIentrasMas45566Mejor____%%%dddd",
+    "expiration": "30"
+  }
+}
+ 
+ 
+ 
+ 
+ 
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/token",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/withdrawal",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5004"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/transaction/withdrawal",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/deposit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/transaction/deposit",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/history/{accountId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5005"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/history/{accountId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
+ 
+ 
+REGISTRO Y DESCUBRIMIENTO
+==========================
+ 
+ 
+docker run --name consul-service -p 8500:8500 -d --network micro  consul
+ 
+ 
+ 
+ 
+ 
+ "consul": {
+    "enabled": true,
+    "url": "http://localhost:8500",
+    "service": "security-service",
+    "address": "host.docker.internal",
+    "port": "5001",
+    "pingEnabled": true,
+    "pingEndpoint": "ping",
+    "pingInterval": 5,
+    "removeAfterInterval": 10,
+    "requestRetries": 3
+  }
+ 
+ 
+ 
+ 
+ 
+public void ConfigureServices(IServiceCollection services)
+        {
+ 
+            services.AddControllers();
+ 
+            services.AddDbContext<ContextDatabase>(
+               opt =>
+               {
+                   opt.UseMySQL(Configuration["mysql:cn"]);
+               });
+            services.AddScoped<IAccessService, AccessService>();
+            services.Configure<JwtOptions>(Configuration.GetSection("jwt"));
+ 
+            /*Start - Consul*/
+            services.AddSingleton<IServiceId, ServiceId>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddConsul();
+            /*End - Consul*/
+ 
+        }
+ 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            IHostApplicationLifetime applicationLifetime, IConsulClient consulClient)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+ 
+            app.UseRouting();
+ 
+            app.UseAuthorization();
+ 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+ 
+            var serviceId = app.UseConsul();
+            applicationLifetime.ApplicationStopped.Register(() =>
+            {
+                consulClient.Agent.ServiceDeregister(serviceId);
+            });
+        }
+ 
+ 
+ 
+using Microsoft.AspNetCore.Mvc;
+ 
+namespace MS.AFORO255.Security.Controllers
+{
+    [Route("")]
+    [ApiController]
+    public class HomeController : ControllerBase
+    {
+        [HttpGet("ping")]
+        public IActionResult Ping()
+        {
+            return Ok();
+        }
+    }
+}
+ 
+ 
+https://www.consul.io/docs
+ 
+ 
+BALANCEADOR DE CARGA
+https://fabiolb.net/quickstart/
+ 
+ 
+docker run --name fabio-service -e FABIO_REGISTRY_CONSUL_ADDR=consul-service:8500 -p 9998:9998 -p 9999:9999 -d --network micro  fabiolb/fabio
+ 
+ 
+ 
+  "fabio": {
+    "enabled": true,
+    "url": "http://localhost:9999",
+    "service": "account-service",
+    "requestRetries": 3
+  }
+ 
+ 
+ 
+ 
+ 
+services.AddFabio();
+ 
+ 
+ 
+ {
+      "DownstreamPathTemplate": "/account-service/api/account",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9999"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    }
+ 
+ 
+ 
+ 
+ 
+CONFIG
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+serconf.properties
+ 
+cnmysql: server=localhost;port=3307;database=db_security;user=root;password=Aforo255#2019
+cnpostgres: Server=localhost;Port=5434;Database=db_account;User Id=postgres;Password=Aforo255#2019;
+cnmongo: mongodb://aforo255:Aforo255#2019@localhost:27018
+cnsql: Server=localhost,1434;Database=db_account;User Id=sa;Password=Aforo255#2019;
+cnmariadb: server=localhost;port=3310;database=db_notification;user=root;password=Aforo255#2019
+cnredis: localhost
+enviroment: produccion
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+serconf-development.properties
+ 
+cnmysql: server=localhost;port=3307;database=db_security;user=root;password=Aforo255#2019
+cnpostgres: Server=localhost;Port=5434;Database=db_account;User Id=postgres;Password=Aforo255#2019;
+cnmongo: mongodb://aforo255:Aforo255#2019@localhost:27018
+cnsql: Server=localhost,1434;Database=db_account;User Id=sa;Password=Aforo255#2019;
+cnmariadb: server=localhost;port=3310;database=db_notification;user=root;password=Aforo255#2019
+cnredis: localhost
+enviroment: development
+ 
+ 
+serconf-docker.properties
+ 
+cnmysql: server=mysql-database;port=3306;database=db_security;user=root;password=Aforo255#2019
+cnpostgres: Server=postgres-database;Port=5432;Database=db_account;User Id=postgres;Password=Aforo255#2019;
+cnmongo: mongodb://aforo255:Aforo255#2019@mongo-database:27017
+cnsql: Server=sql-database,1433;Database=db_account;User Id=sa;Password=Aforo255#2019;
+cnmariadb: server=maria-database;port=3306;database=db_notification;user=root;password=Aforo255#2019
+cnredis: redis-database
+enviroment: docker
+ 
+ 
+ 
+ 
+ 
+docker run -d --name config-service -p 8888:8888 -e SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/ivancuadros1988/msconfig  hyness/spring-cloud-config-server	
+ 
+ 
+http://localhost:8888/serconf/production
+http://localhost:8888/serconf/docker
+http://localhost:8888/serconf/development
+ 
+ 
+ 
+ 
+Steeltoe.Extensions.Configuration.ConfigServerCore 
+ 
+ 
+ 
+  "spring": {
+    "cloud": {
+      "config": {
+        "uri": "http://localhost:8888"
+      }
+    },
+    "application": {
+      "name": "serconf"
+    }
+  }
+ 
+ 
+ 
+ 
+ 
+ public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureAppConfiguration((host, builder) =>
+                    {
+                        var env = host.HostingEnvironment;
+                        builder.AddConfigServer(env.EnvironmentName);
+                    });
+ 
+                    webBuilder.UseStartup<Startup>();
+                });
+ 
+ 
+ 
+ 
+ 
+services.AddDbContext<ContextDatabase>(
+               opt =>
+               {
+                   //opt.UseMySQL(Configuration["mysql:cn"]);
+                   opt.UseMySQL(Configuration["cnmysql"]);
+               });
+ 
+ 
+http://localhost:8888/serconf/production
+ 
+ 
+ 

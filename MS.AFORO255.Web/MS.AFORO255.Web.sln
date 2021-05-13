@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{51700513-777E-49A7-A9E8-52B225900904}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cross", "cross", "{25A94744-8558-4700-9D18-BED880A909C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MS.AFORO255.Web.UI", "src\MS.AFORO255.Web.UI\MS.AFORO255.Web.UI.csproj", "{20E121B7-2F12-4A46-AC3A-DF1D924A8606}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MS.AFORO255.Cross.Proxy", "cross\MS.AFORO255.Cross.Proxy\MS.AFORO255.Cross.Proxy.csproj", "{8FB77B7E-38A3-4AB1-AB1A-6F61804C8183}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MS.AFORO255.Web.DTO", "src\MS.AFORO255.Web.DTO\MS.AFORO255.Web.DTO.csproj", "{75DAB193-E5C3-49C1-8E7F-E37458E0707E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MS.AFORO255.Web.Service", "src\MS.AFORO255.Web.Service\MS.AFORO255.Web.Service.csproj", "{FACF03E0-2566-4799-9051-CC1F3D587A6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20E121B7-2F12-4A46-AC3A-DF1D924A8606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E121B7-2F12-4A46-AC3A-DF1D924A8606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E121B7-2F12-4A46-AC3A-DF1D924A8606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E121B7-2F12-4A46-AC3A-DF1D924A8606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB77B7E-38A3-4AB1-AB1A-6F61804C8183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB77B7E-38A3-4AB1-AB1A-6F61804C8183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB77B7E-38A3-4AB1-AB1A-6F61804C8183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB77B7E-38A3-4AB1-AB1A-6F61804C8183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DAB193-E5C3-49C1-8E7F-E37458E0707E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DAB193-E5C3-49C1-8E7F-E37458E0707E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DAB193-E5C3-49C1-8E7F-E37458E0707E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DAB193-E5C3-49C1-8E7F-E37458E0707E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACF03E0-2566-4799-9051-CC1F3D587A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACF03E0-2566-4799-9051-CC1F3D587A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACF03E0-2566-4799-9051-CC1F3D587A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACF03E0-2566-4799-9051-CC1F3D587A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20E121B7-2F12-4A46-AC3A-DF1D924A8606} = {51700513-777E-49A7-A9E8-52B225900904}
+		{8FB77B7E-38A3-4AB1-AB1A-6F61804C8183} = {25A94744-8558-4700-9D18-BED880A909C9}
+		{75DAB193-E5C3-49C1-8E7F-E37458E0707E} = {51700513-777E-49A7-A9E8-52B225900904}
+		{FACF03E0-2566-4799-9051-CC1F3D587A6E} = {51700513-777E-49A7-A9E8-52B225900904}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {957F47E5-C7B3-4F28-A9DC-4DF98CD0FD4E}
+	EndGlobalSection
+EndGlobal

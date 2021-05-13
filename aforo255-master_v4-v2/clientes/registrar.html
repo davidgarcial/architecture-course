@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Aforo255</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+
+     <!-- Styles -->
+     <link rel="stylesheet" type="text/css" href="../css/ninja.css">
+ 
+     <!-- Javascripts -->
+     <script type="text/javascript" src="../script/ninja.js"></script>
+    
+</head>
+
+<body>
+    <div class="webapp">
+        <div class="header">
+            <div class="logo-2"></div>
+            <div class="header-options" id="header-options">
+                <div class="user">
+                    <div class="user-name">Jose Luis Nakahodo</div>
+                    <div class="user-photo user-photo-text">JN</div>
+                </div>
+
+                <div class="out-session" id="out-session">
+                    <img src="../css/img/search-icon.png">
+                    <span>Cerrar sesión</span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <!-- <div class="browser">
+                <div class="browser-options">
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Home</span>
+                    </div>
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Productos</span>
+                    </div>
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Crédito</span>
+                    </div>
+                    <div class="browser-option">
+                        <span class="browser-option-icon"></span>
+                        <span class="browser-option-text">Clientes</span>
+                    </div>
+        
+                </div>
+            </div> -->
+
+
+            <div class="browser">
+                <div class="browser-options" id="browser-options">
+                    <div class="option">
+                        <span class="option-icon">
+                            <img src="../css/img/search-icon.png" >
+                        </span>
+                        <span class="option-text">
+                            <a href="../home.html">    
+                                    Home 
+                            </a>  
+                        </span>
+                    </div>
+                    <!-- <div class="option">
+                        <span class="option-icon">
+                            <img src="css/img/search-icon.png" >
+                        </span>
+                        <span class="option-text">Productos</span>
+                        <span class="option-sub">
+                            <span class="option-text">Listado </span>
+                            <span class="option-text">Registro</span>
+                        </span>
+                    </div> -->
+                    <div class="option act">
+                            <span class="option-icon">
+                                <img src="../css/img/search-icon.png" >
+                            </span>
+                            <span class="option-text">Creditos</span>
+                            <span class="option-sub">
+                                <span class="option-text menu-load" data-path="credit-list">
+                                    <a href="../creditos/listado.html">    
+                                        Listado 
+                                    </a>
+                                </span>
+                                <span class="option-text menu-load" data-path="credit-add">
+                                    <a href="../creditos/registrar.html">    
+                                        Registro 
+                                    </a>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="option act">
+                            <span class="option-icon">
+                                <img src="../css/img/search-icon.png">
+                            </span>
+                            <span class="option-text">Clientes</span>
+                            <span class="option-sub">
+                                <span class="option-text menu-load" data-path="customer-list"> 
+                                    <a href="listado.html">    
+                                        Listado 
+                                    </a> 
+                                </span>
+                                <span class="option-text menu-load" data-path="customer-add">
+                                    <a href="registrar.html">    
+                                        Registro 
+                                    </a> 
+                                </span>
+                            </span>
+                        </div>
+                </div>
+            </div>
+
+             <!--  INICIO CONTENIDO  -->
+            <div id="div-content"> 
+
+                
+                    <div class="views">
+                            <div class="view">
+                                <div class="view-title">
+                                    <div class="view-name">
+                                        <div class="view-name-small">Clientes</div>
+                                        <div class="view-name-text">Registrar cliente</div>
+                                    </div>
+                                </div>
+            
+                                <div class="view-content">
+            
+                                    <div class="section content-data">
+                                        <div class="cell-1 data-form">
+                                            <div class="title-1">Datos personales</div>
+                                            <div class="input">
+                                                <label class="label">Nombres</label>
+                                                <input type="text" class="text">
+                                            </div>
+                                            <div class="input">
+                                                <label class="label">Apellidos</label>
+                                                <input type="text" class="text">
+                                            </div>
+                                        </div>
+            
+                                        <div class="cell-1 data-form">
+                                            <div class="title-1">Cargar foto</div>
+                                            <div class="input">
+                                                <label class="label">Estado</label>
+                                                <!-- <input type="file"> -->
+            
+                                                <div class="input-file-container">  
+                                                    <input class="input-file"  type="file" accept="image/png, image/jpeg, image/jpg">
+                                                    <label tabindex="0"  class="input-file-trigger">Seleccionar archivo <img src="../css/img/upload.svg"></label>   
+                                                </div>
+            
+                                            </div>
+                                        </div>
+            
+                                        <div class="cell-1 data-form-type-2">
+                                            <div class="input">
+                                                <label class="label">Documento identidad</label>
+                                                <input type="text" class="text">
+                                            </div>
+                                            <div class="input">
+                                                <label class="label">Estado</label>
+                                                <!--<select class="select"></select>-->
+												 <input id="ck_state" type="checkbox" checked="checked" />
+                                            </div>
+                                        </div>
+            
+                                        
+            
+                                        <div class="buttons" style="margin-top: 15px;">
+                                           <!-- <button class="button-ghost">Cancelar</button> &nbsp; -->
+                                            <button class="button">Registrar</button>
+                                        </div>
+            
+                                    </div>
+            
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+             <!--  FIN CONTENIDO  -->
+
+        </div>
+        <div class="footer">
+            <pre><span class="bold"><  </span>Aforo255 / Todos los derechos reservados / 2019<span class="bold">  /></span></pre>
+        </div>
+    </div>
+    <!-- /--------------------------------------------------------------------------------/ -->
+    <script type="text/javascript">
+
+    </script>
+
+    <script type="text/javascript" src="../script/bundle.js"></script>
+
+    </div>
+
+</html>

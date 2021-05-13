@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\cross\MS.AFORO255.Cross.Proxy\MS.AFORO255.Cross.Proxy.csproj" />
+    <ProjectReference Include="..\MS.AFORO255.Web.DTO\MS.AFORO255.Web.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

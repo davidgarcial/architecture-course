@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Aforo255 Training Center</title>
+    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/assets/favicon.ico")">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="title" content="Aforo255 Training Center">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="@Url.Content("~/css/common.css")">
+</head>
+<body>
+    <div class="page loader">
+        <div class="page1__header">
+            <section class="section1">
+                <div class="section1__align">
+                    <div class="section1__main">
+                        <div class="item__list">
+                            <div class="item"><a href="index.html"><img src="@Url.Content("~/assets/logo.svg")"></a></div>
+                            <div class="item">
+                                <h2>Usuario</h2><span id="logout">US</span>
+                                <div class="item__close" id="out"><a href="@Url.Action("Logout","Auth")">Cerrar sesión</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section2" id="bg"></section>
+        </div>
+        <div class="page1__main">
+            <section class="section1">
+                <div class="section1__align">
+                    <div class="section1__header">
+                        <div class="item__list">
+                            <div class="item">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li>
+                                        <a id="supplier">Proveedores</a>
+                                        <ul>
+                                            <li><a href="#">Listado</a></li>
+                                            <li><a href="#">Registro</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a id="account">Cuentas</a>
+                                        <ul>
+                                            <li><a href="@Url.Action("Index","Account")">Account</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Clientes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section1__main">
+                        <div class="item__list">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="page1__footer">
+            <section class="section1">
+                <div class="section1__align">
+                    <div class="section1__main">
+                        <div class="item__list">
+                            <div class="item"><span><  Aforo255 / Todos los derechos reservados / 2020  /></span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/js/main.js")"></script>
+</body>
+</html>
