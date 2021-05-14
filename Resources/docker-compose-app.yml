@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   gateway:
-    image: ivancuadros1988/img-gateway
+    image: davidgarcial/img-gateway
     container_name: gateway-service
     restart: always
     ports:
@@ -10,7 +10,7 @@ services:
     networks:
     - aforo255
   security:
-    image: ivancuadros1988/img-security
+    image: davidgarcial/img-security
     container_name: security-service
     restart: always
     ports:
@@ -18,7 +18,7 @@ services:
     networks:
     - aforo255
   account:
-    image: ivancuadros1988/img-account
+    image: davidgarcial/img-account
     container_name: account-service
     restart: always
     ports:
@@ -26,7 +26,7 @@ services:
     networks:
     - aforo255
   deposit:
-    image: ivancuadros1988/img-deposit
+    image: davidgarcial/img-deposit
     container_name: deposit-service
     restart: always
     ports:
@@ -34,7 +34,7 @@ services:
     networks:
     - aforo255
   withdrawal:
-    image: ivancuadros1988/img-withdrawal
+    image: davidgarcial/img-withdrawal
     container_name: withdrawal-service
     restart: always
     ports:
@@ -42,7 +42,7 @@ services:
     networks:
     - aforo255
   history:
-    image: ivancuadros1988/img-history
+    image: davidgarcial/img-history
     container_name: history-service
     restart: always
     ports:
@@ -50,7 +50,7 @@ services:
     networks:
     - aforo255
   notification:
-    image: ivancuadros1988/img-notification
+    image: davidgarcial/img-notification
     container_name: notification-service
     restart: always
     ports:
