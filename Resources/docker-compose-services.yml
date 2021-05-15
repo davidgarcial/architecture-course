@@ -49,6 +49,9 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq-service
+    environment:
+      - RABBITMQ_DEFAULT_USER=aforo255
+      - RABBITMQ_DEFAULT_PASS=aforo255
     ports:
     - 5672:5672
     - 15672:15672
@@ -62,7 +65,7 @@ services:
     networks:
     - aforo255
     volumes:
-    - /home/aforo255/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
   grafana:
     image: grafana/grafana
     container_name: grafana-service
