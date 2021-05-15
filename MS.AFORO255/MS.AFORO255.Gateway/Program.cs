@@ -20,7 +20,7 @@ namespace MS.AFORO255.Gateway
                         // config.AddJsonFile("ocelot.json", optional: false);
 
                         config.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-                        config.AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}", optional: false);
+                        config.AddJsonFile($"ocelot.{host.HostingEnvironment.EnvironmentName}.json", optional: false);
                     });
 
                     webBuilder.UseStartup<Startup>();
