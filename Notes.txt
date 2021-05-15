@@ -42,6 +42,8 @@ docker run --name consul-service -p 8500:8500 -d --network micro  consul
 docker run --name fabio-service -e FABIO_REGISTRY_CONSUL_ADDR=consul-service:8500 -p 9998:9998 -p 9999:9999 -d --network micro  fabiolb/fabio
 docker run -d --name config-service -p 8888:8888 -e SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/davidgarcial/architecture-conf  hyness/spring-cloud-config-server
 
+docker run -d --name config-service -p 8888:8888 --network micro -e SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/davidgarcial/architecture-conf hyness/spring-cloud-config-server
+
 docker run -d -p 6379:6379 --network micro -v c:/docker/redis:/data -e REDIS_PASSWORD=Aforo255#2019 --name redis-database redis --requirepass Aforo255#2019
 docker run -d -p 6379:6379 --network micro  -e REDIS_PASSWORD=Aforo255#2019 --name redis-database redis --requirepass Aforo255#2019
 
