@@ -1,0 +1,83 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "security-service",
+          "Port": "8080"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/token",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/account-service/api/account",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "fabio-service",
+          "Port": "9999"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/deposit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "deposit-service",
+          "Port": "8080"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/transaction/deposit",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/transaction/withdrawal",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "withdrawal-service",
+          "Port": "8080"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/transaction/withdrawal",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/history/{accountId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "history-service",
+          "Port": "8080"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/history/{accountId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://gateway-service:8080"
+  }
+}
